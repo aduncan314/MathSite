@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import project_setup
+
+PROJECT_CONFIG = project_setup.get_settings()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#4=ws1)g2+n&iag2&kl_y15ds)694o=_kcoj))-b7)t*1ytqsl'
+SECRET_KEY = PROJECT_CONFIG['secret_key']
 
 # TODO SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,10 +82,10 @@ DATABASES = {
     },
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mathsitetest',
-        'USER': 'MathSiteAdmin',
-        'PASSWORD': 'thisIsNotYetSecure',
-        'HOST': 'mathsite.c3lluzqhklc6.us-east-2.rds.amazonaws.com',
+        'NAME': PROJECT_CONFIG['database_name'],
+        'USER': PROJECT_CONFIG['admin_user'],
+        'PASSWORD': PROJECT_CONFIG['admin_password'],
+        'HOST': PROJECT_CONFIG['db_host'],
         'PORT': '5432',
     }
 }
